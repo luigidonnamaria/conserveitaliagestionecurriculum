@@ -186,7 +186,7 @@
                                     <div class="control_wrapper accordion-control-section">
                                         <div class="form-group required">
                                             <label class="control-label">Provincia</label>
-                                            <ejs-dropdownlist id="provincia" dataSource="@Enum.GetNames(typeof(Provincia))" ejs-for="@Model.curriculum.CurriculumProvincia" popupWidth="100px"></ejs-dropdownlist>
+                                            <ejs-dropdownlist id="provincia" dataSource="@Model.getControl("Provincia")" ejs-for="@Model.curriculum.CurriculumProvincia" popupWidth="100px"></ejs-dropdownlist>
                                         </div>
                                         <div id="provinciaError">
                                             <span asp-validation-for="@Model.curriculum.CurriculumProvincia" class="e-error"></span>
@@ -247,7 +247,7 @@
                                     <div class="control_wrapper accordion-control-section">
                                         <div class="form-group required">
                                             <label class="control-label">Stato Civile</label>
-                                            <ejs-dropdownlist id="statocivile" dataSource="@Enum.GetNames(typeof(StatoCivile))" ejs-for="@Model.curriculum.CurriculumStatoCivile" popupWidth="150px"></ejs-dropdownlist>
+                                            <ejs-dropdownlist id="statocivile" dataSource="@Model.getControl("StatoCivile")" ejs-for="@Model.curriculum.CurriculumStatoCivile" popupWidth="150px"></ejs-dropdownlist>
                                         </div>
                                         <div id="statocivileError">
                                             <span asp-validation-for="@Model.curriculum.CurriculumStatoCivile" class="e-error"></span>

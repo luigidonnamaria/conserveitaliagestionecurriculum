@@ -297,15 +297,6 @@ namespace conserveitaliagestionecurriculum.Models
 }
 
 
-public enum Provincia
-{
-   AG,
-   AL,
-    AN,
-    AO,
-    AP
-}
-
 public enum PatenteComputer
 {
     ICDLEssentials,
@@ -344,14 +335,7 @@ public enum LingueLivello
     
 }
 
-public enum StatoCivile
-{
-    Celibe,
-    Nubile,
-    Coniugato
-    
-    
-}
+
 
 public enum Assunzione
 {

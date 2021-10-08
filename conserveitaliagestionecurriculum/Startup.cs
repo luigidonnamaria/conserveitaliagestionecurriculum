@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using conserveitaliagestionecurriculum.Service;
 
 namespace conserveitaliagestionecurriculum
 {
@@ -17,26 +18,29 @@ namespace conserveitaliagestionecurriculum
     {
        
 
+        private  IConfiguration _configuration;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc(option => option.EnableEndpointRouting = false);
-           
+            services.AddSharePointClientContext();
+
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,IConfiguration configuration)
         {
+            _configuration = configuration;
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
             app.UseMvc();
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTE0MTgxQDMxMzkyZTMzMmUzMGVTaUlQNXdHVmlhQnJBVUVVeldDSHoyQ2VWSGZ1YURnZzRUWUQzZzJoakE9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(_configuration.GetValue<string>("SyncFusion:LicenseKey"));
             
         }
     }
