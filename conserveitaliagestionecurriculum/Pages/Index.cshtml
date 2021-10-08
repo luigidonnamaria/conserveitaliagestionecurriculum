@@ -1,0 +1,1690 @@
+﻿@page
+@model conserveitaliagestionecurriculum.Pages.IndexModel
+
+
+@section PreScripts{
+    <script>
+        $.fn.responsiveTabs = function () {
+            console.log("dentro");
+            this.addClass('responsive-tabs');
+            this.append($('<span class="glyphicon glyphicon-triangle-bottom"></span>'));
+            this.append($('<span class="glyphicon glyphicon-triangle-top"></span>'));
+
+            this.on('click', 'li.active > button, span.glyphicon', function () {
+                this.toggleClass('open');
+            }.bind(this));
+
+            this.on('click', 'li:not(.active) > button', function () {
+                this.removeClass('open');
+            }.bind(this));
+        };
+
+        $('.nav.nav-tabs').responsiveTabs();
+
+
+
+
+    </script>
+}
+
+@{
+    var terms = "Il presente trattamento dei dati personali - raccolti presso l'interessato - persegue esclusivamente finalità legate alla selezione di personale con cui potenzialmente stipulare contratti di lavoro, e sarà effettuato mediante strumenti automatizzati e cartacei. L'elenco degli incaricati del trattamento è disponibile telefonando al numero 051/6228311. Il trattamento riguarderà, esclusivamente, dati personali comuni. Il conferimento dei dati è facoltativo. I dati non saranno soggetti a comunicazione o diffusione.Titolare del trattamento è CONSERVE ITALIA soc.coop.agricola, con sede a San Lazzaro di Savena(BO), via Paolo Poggi n.11.All'interessato spetta l'esercizio dei specifici diritti così come previsto dall'art. 7 D.Lgs. 196/03";
+}
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <!-- Syncfusion Essential JS 2 Styles -->
+
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/material.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <!-- Syncfusion Essential JS 2 Scripts -->
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+
+
+
+    <link href="~/css/forms.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/index.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+
+    <!-- #region Header -->
+    <div id="control_header" class="col-lg-12 control-section">
+        <div class="control_wrapper">
+            <div class="row g-3">
+                <div class="col-md-12">
+                    <img class="img-fluid" src="~/images/conservelogo_resize.png" />
+                </div>
+                <div class="col-md-12">
+                    <h1>Inserisci il tuo Curriculum</h1>
+                </div>
+                <div class="col-md-12">
+                    <div class="description-header">
+                        <span>La invitiamo a compilare il modulo sottostante. Se lo ritiene opportuno potrà, in aggiunta, inviarci anche il suo curriculum vitae in formato word o pdf e/o una foto. Si ricordi, in ogni caso, di accettare i termini della privacy in fondo alla pagina</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- #endregion -->
+        <div class="control_wrapper" id="control_wrapper">
+
+
+
+            <form id="dischargeform" method="post" asp-page="Index" enctype="multipart/form-data" class="row g-3">
+                <!-- #region Tabs-->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li role="presentation" class="nav-item active">
+                        <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab" aria-controls="info" aria-selected="true">Informazioni Personali</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="titoli-tab" data-bs-toggle="tab" data-bs-target="#titoli" type="button" role="tab" aria-controls="titoli" aria-selected="true">Titoli di Studio</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="corsi-tab" data-bs-toggle="tab" data-bs-target="#corsi" type="button" role="tab" aria-controls="corsi" aria-selected="true">Corsi di Formazione</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="occupazione-tab" data-bs-toggle="tab" data-bs-target="#occupazione" type="button" role="tab" aria-controls="occupazione" aria-selected="true">Occupazione Attuale</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="lingue-tab" data-bs-toggle="tab" data-bs-target="#lingue" type="button" role="tab" aria-controls="lingue" aria-selected="true">Lingue</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="conoscenzeinformatiche-tab" data-bs-toggle="tab" data-bs-target="#conoscenzeinformatiche" type="button" role="tab" aria-controls="conoscenzeinformatiche" aria-selected="true">Conoscenze Informatiche</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="esperienze-tab" data-bs-toggle="tab" data-bs-target="#esperienze" type="button" role="tab" aria-controls="esperienze" aria-selected="true">Esperienze Estere</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="altreinfo-tab" data-bs-toggle="tab" data-bs-target="#altreinfo" type="button" role="tab" aria-controls="altreinfo" aria-selected="true">Altre Informazioni</button>
+                    </li>
+                    <li role="presentation" class="nav-item">
+                        <button class="nav-link" id="inviodati-tab" data-bs-toggle="tab" data-bs-target="#inviodati" type="button" role="tab" aria-controls="inviodati" aria-selected="true">Invio Dati</button>
+                    </li>
+                </ul>
+                <!-- #endregion -->
+
+                <div class="tab-content" id="myTabContent">
+                    <!-- #region InfoTab-->
+                    <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+                        <div class="card">
+                            <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+
+                                <div class="form-card">
+
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Nome</label>
+                                            <ejs-textbox id="nome" ejs-for="@Model.curriculum.Nome"></ejs-textbox>
+                                        </div>
+                                        <div id="nameError">
+                                            <span asp-validation-for="@Model.curriculum.Nome" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Cognome</label>
+                                            <ejs-textbox id="cognome" ejs-for="@Model.curriculum.Cognome" />
+                                        </div>
+                                        <div id="cognomeError">
+                                            <span asp-validation-for="@Model.curriculum.Cognome" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Indirizzo</label>
+                                            <ejs-textbox id="indirizzo" ejs-for="@Model.curriculum.Indirizzo" />
+                                        </div>
+                                        <div id="indirizzoError">
+                                            <span asp-validation-for="@Model.curriculum.Indirizzo" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Città</label>
+                                            <ejs-textbox id="citta" ejs-for="@Model.curriculum.Citta" />
+                                        </div>
+                                        <div id="cittaError">
+                                            <span asp-validation-for="@Model.curriculum.Citta" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Provincia</label>
+                                            <ejs-dropdownlist id="provincia" dataSource="@Enum.GetNames(typeof(Provincia))" ejs-for="@Model.curriculum.CurriculumProvincia" popupWidth="100px"></ejs-dropdownlist>
+                                        </div>
+                                        <div id="provinciaError">
+                                            <span asp-validation-for="@Model.curriculum.CurriculumProvincia" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Cap</label>
+                                            <ejs-textbox id="cap" ejs-for="@Model.curriculum.Cap" />
+                                        </div>
+                                        <div id="capError">
+                                            <span asp-validation-for="@Model.curriculum.Cap" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Stato</label>
+                                            <ejs-dropdownlist id="stato" dataSource="@Enum.GetNames(typeof(Stato))" ejs-for="@Model.curriculum.CurriculumStato" popupWidth="150px"></ejs-dropdownlist>
+                                        </div>
+                                        <div id="statoError">
+                                            <span asp-validation-for="@Model.curriculum.CurriculumStato" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Sesso</label><br />
+                                            @foreach (var gender in Enum.GetValues(typeof(Sessi)))
+                                            {
+
+                                            <ejs-radiobutton id="@gender" value="@gender" label="@gender" name="sesso" ejs-for="@Model.curriculum.Sesso"></ejs-radiobutton>
+                                            }
+                                        </div>
+                                        <div id="genderError">
+                                            <span asp-validation-for="@Model.curriculum.Sesso" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Stato Civile</label>
+                                            <ejs-dropdownlist id="statocivile" dataSource="@Enum.GetNames(typeof(StatoCivile))" ejs-for="@Model.curriculum.CurriculumStatoCivile" popupWidth="150px"></ejs-dropdownlist>
+                                        </div>
+                                        <div id="statocivileError">
+                                            <span asp-validation-for="@Model.curriculum.CurriculumStatoCivile" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Patente</label>
+                                        <ejs-dropdownlist id="patente" dataSource="@Enum.GetNames(typeof(Patente))" ejs-for="@Model.curriculum.CurriculumPatente" popupWidth="100px"></ejs-dropdownlist>
+                                    </div>
+                                </div>
+                                <div id="patenteError">
+                                    <span asp-validation-for="@Model.curriculum.CurriculumPatente" class="e-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Telefono Abitazione</label>
+                                            <ejs-textbox id="telefonoabitazione" ejs-for="@Model.curriculum.TelefonoAbitazione" />
+                                        </div>
+                                        <div id="telefonoabitazioneError">
+                                            <span asp-validation-for="@Model.curriculum.TelefonoAbitazione" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Telefono Cellulare</label>
+                                        <ejs-textbox id="telefonocellulare" ejs-for="@Model.curriculum.TelefonoCellulare" />
+                                    </div>
+                                </div>
+                                <div id="telefonocellulareError">
+                                    <span asp-validation-for="@Model.curriculum.TelefonoCellulare" class="e-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Numero Ufficio</label>
+                                        <ejs-textbox id="numeroufficio" ejs-for="@Model.curriculum.NumeroUfficio" />
+                                    </div>
+                                </div>
+                                <div id="numeroufficioError">
+                                    <span asp-validation-for="@Model.curriculum.NumeroUfficio" class="e-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Altro Recapito</label>
+                                        <ejs-textbox id="altrorecapito" ejs-for="@Model.curriculum.AltroRecapito" />
+                                    </div>
+                                </div>
+                                <div id="altrorecapitoError">
+                                    <span asp-validation-for="@Model.curriculum.AltroRecapito" class="e-error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+
+                                            <label class="control-label">Email</label>
+                                            <ejs-textbox id="email" ejs-for="@Model.curriculum.Email" />
+                                        </div>
+
+
+                                        <div id="emailError">
+                                            <span asp-validation-for="@Model.curriculum.Email" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Data di Nascita</label>
+                                            <ejs-datepicker id="datanascita" format="dd/MM/yyyy" ejs-for="@Model.curriculum.DataNascita" />
+                                        </div>
+                                        <div id="datanascitaError">
+                                            <span asp-validation-for="@Model.curriculum.DataNascita" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Url sito internet</label>
+                                        <ejs-textbox id="urlsito" ejs-for="@Model.curriculum.UrlSito" />
+                                    </div>
+                                </div>
+                                <div id="urlsitoError">
+                                    <span asp-validation-for="@Model.curriculum.UrlSito" class="e-error"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Città di Nascita</label>
+                                            <ejs-textbox id="cittanascita" ejs-for="@Model.curriculum.CittaNascita" />
+                                        </div>
+                                        <div id="cittanascitaError">
+                                            <span asp-validation-for="@Model.curriculum.CittaNascita" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <div class="form-group required">
+                                            <label class="control-label">Nazionalità</label>
+                                            <ejs-dropdownlist id="nazionalita" dataSource="@Enum.GetNames(typeof(Stato))" ejs-for="@Model.curriculum.Nazionalita" popupWidth="150px"></ejs-dropdownlist>
+                                        </div>
+                                        <div id="nazionalitaError">
+                                            <span asp-validation-for="@Model.curriculum.Nazionalita" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Codice Fiscale</label>
+                                        <ejs-textbox id="codicefiscale" ejs-for="@Model.curriculum.CodiceFiscale" />
+                                    </div>
+                                </div>
+                                <div id="codicefiscaleError">
+                                    <span asp-validation-for="@Model.curriculum.CodiceFiscale" class="e-error"></span>
+                                </div>
+                            </div>
+                            </div>
+                                </div>
+
+                        </div>
+                    </div>
+
+                    <!-- #endregion -->
+                    <!-- #region TitoliStudio -->
+                    <div class="tab-pane fade" id="titoli" role="tabpanel" aria-labelledby="titoli-tab">
+                        <!-- #region 1a sezione-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-3">
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <div class="form-group required">
+                                                    <label class="control-label">Titolo Studio</label>
+                                                    <ejs-dropdownlist id="titolostudiouno" dataSource="@Enum.GetNames(typeof(TitoloStudio))" ejs-for="@Model.curriculum.TitoloStudioUno" popupWidth="150px"></ejs-dropdownlist>
+                                                </div>
+                                                <div id="titolostudiounoError">
+                                                    <span asp-validation-for="@Model.curriculum.TitoloStudioUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <div class="form-group required">
+
+                                                    <label class="control-label">Sede</label>
+                                                    <ejs-textbox id="sedeuno" ejs-for="@Model.curriculum.SedeUno" />
+                                                </div>
+
+                                                <div id="sedeunoError">
+                                                    <span asp-validation-for="@Model.curriculum.SedeUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <div class="form-group required">
+
+                                                    <label class="control-label">Anno</label>
+                                                    <ejs-textbox id="announo" ejs-for="@Model.curriculum.AnnoUno" />
+                                                </div>
+
+                                                <div id="announoError">
+                                                    <span asp-validation-for="@Model.curriculum.AnnoUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <div class="form-group required">
+
+                                                    <label class="control-label">Tipologia/Facoltà</label>
+                                                    <ejs-textbox id="tipologiauno" ejs-for="@Model.curriculum.TipologiaUno" />
+                                                </div>
+
+                                                <div id="tipologiaunoError">
+                                                    <span asp-validation-for="@Model.curriculum.TipologiaUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-card">
+                                            <div class="form-group required">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="control-label">Voto</label>
+                                                    <ejs-textbox id="votouno" ejs-for="@Model.curriculum.VotoUno" />
+                                                </div>
+                                            </div>
+                                            <div id="votounoError">
+                                                <span asp-validation-for="@Model.curriculum.VotoUno" class="e-error"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Su</label>
+                                                <ejs-dropdownlist id="votorangeuno" dataSource="@Enum.GetNames(typeof(RangeVoto))" ejs-for="@Model.curriculum.RangeVotoUno" popupWidth="150px"></ejs-dropdownlist>
+                                            </div>
+                                        </div>
+                                        <div id="votorangeunoError">
+                                            <span asp-validation-for="@Model.curriculum.RangeVotoUno" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Lode</label>
+                                                <ejs-dropdownlist id="lodeuno" dataSource="@Enum.GetNames(typeof(Lode))" ejs-for="@Model.curriculum.LodeUno" popupWidth="50px"></ejs-dropdownlist>
+                                            </div>
+                                        </div>
+                                        <div id="lodeunoError">
+                                            <span asp-validation-for="@Model.curriculum.LodeUno" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #endregion-->
+                        <!-- #region 2a sezione-->
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Altre qualifiche</h5>
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+                                                <label class="control-label">Titolo Studio (2)</label>
+                                                <ejs-dropdownlist id="titolostudiodue" dataSource="@Enum.GetNames(typeof(TitoloStudio))" ejs-for="@Model.curriculum.TitoloStudioDue" popupWidth="150px"></ejs-dropdownlist>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+
+                                                <label class="control-label">Sede</label>
+                                                <ejs-textbox id="sededue" ejs-for="@Model.curriculum.SedeDue" />
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+
+                                                <label class="control-label">Anno</label>
+                                                <ejs-textbox id="annodue" ejs-for="@Model.curriculum.AnnoDue" />
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+
+                                                <label class="control-label">Tipologia/Facoltà</label>
+                                                <ejs-textbox id="tipologiadue" ejs-for="@Model.curriculum.TipologiaDue" />
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-card">
+
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="control-label">Voto</label>
+                                                <ejs-textbox id="votodue" ejs-for="@Model.curriculum.VotoDue" />
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Su</label>
+                                                <ejs-dropdownlist id="votorangedue" dataSource="@Enum.GetNames(typeof(RangeVoto))" ejs-for="@Model.curriculum.RangeVotoDue" popupWidth="150px"></ejs-dropdownlist>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Lode</label>
+                                                <ejs-dropdownlist id="lodedue" dataSource="@Enum.GetNames(typeof(Lode))" ejs-for="@Model.curriculum.LodeDue" popupWidth="50px"></ejs-dropdownlist>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #endregion-->
+                        <!-- #region 3a sezione-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-3">
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+
+                                        <label class="control-label">Titolo Studio (3)</label>
+                                        <ejs-dropdownlist id="titolostudiotre" dataSource="@Enum.GetNames(typeof(TitoloStudio))" ejs-for="@Model.curriculum.TitoloStudioTre" popupWidth="150px"></ejs-dropdownlist>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+
+
+                                        <label class="control-label">Sede</label>
+                                        <ejs-textbox id="sedetre" ejs-for="@Model.curriculum.SedeTre" />
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+
+
+                                        <label class="control-label">Anno</label>
+                                        <ejs-textbox id="annotre" ejs-for="@Model.curriculum.AnnoTre" />
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+
+
+                                        <label class="control-label">Tipologia/Facoltà</label>
+                                        <ejs-textbox id="tipologiatre" ejs-for="@Model.curriculum.TipologiaTre" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-card">
+
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="control-label">Voto</label>
+                                        <ejs-textbox id="vototre" ejs-for="@Model.curriculum.VotoTre" />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Su</label>
+                                        <ejs-dropdownlist id="votorangetre" dataSource="@Enum.GetNames(typeof(RangeVoto))" ejs-for="@Model.curriculum.RangeVotoTre" popupWidth="150px"></ejs-dropdownlist>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-card">
+                                    <div class="control_wrapper accordion-control-section">
+                                        <label class="e-label-bottom">Lode</label>
+                                        <ejs-dropdownlist id="lodetre" dataSource="@Enum.GetNames(typeof(Lode))" ejs-for="@Model.curriculum.LodeTre" popupWidth="50px"></ejs-dropdownlist>
+                                    </div>
+                                </div>
+
+                            </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <!-- #endregion-->
+                    </div>
+                            <!-- #endregion-->
+                            <!-- #region CorsiFormazione-->
+                    <div class="tab-pane fade" id="corsi" role="tabpanel" aria-labelledby="corsi-tab">
+                        <!-- #region 1a sezione-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Corso</label>
+                                                <ejs-textbox id="corsouno" ejs-for="@Model.curriculum.CorsoUno" />
+                                            </div>
+                                        </div>
+                                        <div id="corsounoError">
+                                            <span asp-validation-for="@Model.curriculum.CorsoUno" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Anno</label>
+                                                <ejs-textbox id="annocorsouno" ejs-for="@Model.curriculum.AnnoCorsoUno" />
+                                            </div>
+                                        </div>
+                                        <div id="annocorsounoError">
+                                            <span asp-validation-for="@Model.curriculum.AnnoCorsoUno" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Istituto/Società</label>
+                                                <ejs-textbox id="istitutouno" ejs-for="@Model.curriculum.IstitutoUno" />
+                                            </div>
+                                        </div>
+                                        <div id="istitutounoError">
+                                            <span asp-validation-for="@Model.curriculum.IstitutoUno" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Durata</label>
+                                                <ejs-textbox id="duratauno" ejs-for="@Model.curriculum.DurataUno" />
+                                            </div>
+                                        </div>
+                                        <div id="durataunoError">
+                                            <span asp-validation-for="@Model.curriculum.DurataUno" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- #endregion-->
+                        <!-- #region 2a sezione-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-3">
+
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Corso (2)</label>
+                                                    <ejs-textbox id="corsodue" ejs-for="@Model.curriculum.CorsoDue" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Anno</label>
+                                                    <ejs-textbox id="annocorsodue" ejs-for="@Model.curriculum.AnnoCorsoDue" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Istituto/Società</label>
+                                                    <ejs-textbox id="istitutodue" ejs-for="@Model.curriculum.IstitutoDue" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Durata</label>
+                                                    <ejs-textbox id="duratadue" ejs-for="@Model.curriculum.DurataDue" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <!-- #endregion-->
+                        <!-- #region 3a sezione-->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-3">
+
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Corso (3)</label>
+                                                    <ejs-textbox id="corsotre" ejs-for="@Model.curriculum.CorsoTre" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Anno</label>
+                                                    <ejs-textbox id="annocorsotre" ejs-for="@Model.curriculum.AnnoCorsoTre" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Istituto/Società</label>
+                                                    <ejs-textbox id="istitutotre" ejs-for="@Model.curriculum.IstitutoTre" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Durata</label>
+                                                    <ejs-textbox id="duratatre" ejs-for="@Model.curriculum.DurataTre" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- #endregion-->
+                    </div>
+                            <!-- #endregion -->
+                            <!-- #region OccupazioneAttuale -->
+                            <div class="tab-pane fade" id="occupazione" role="tabpanel" aria-labelledby="occupazione-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+                                                <label class="control-label">Occupato</label><br />
+                                                <ejs-radiobutton id="occupatoSI" value="Si" name="occupato" label="Si" ejs-for="@Model.curriculum.Occupato"></ejs-radiobutton>
+                                                <ejs-radiobutton id="occupatoNo" value="No" name="occupato" label="No" ejs-for="@Model.curriculum.Occupato"></ejs-radiobutton>
+
+
+                                            </div>
+                                        </div>
+                                        <div id="occupatoError">
+                                            <span asp-validation-for="@Model.curriculum.Occupato" class="e-error"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Settore</label>
+                                                <ejs-dropdownlist id="settore" dataSource="@Enum.GetNames(typeof(Settore))" ejs-for="@Model.curriculum.Settore" popupWidth="180px"></ejs-dropdownlist>
+                                            </div>
+                                        </div>
+                                        <div id="settoreError">
+                                            <span asp-validation-for="@Model.curriculum.Settore" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Datore di Lavoro</label>
+                                                <ejs-textbox id="datore" ejs-for="@Model.curriculum.DatoreLavoro" />
+                                            </div>
+                                        </div>
+                                        <div id="datoreLavoroError">
+                                            <span asp-validation-for="@Model.curriculum.DatoreLavoro" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+                                                <label class="control-label">Occupato dal</label>
+                                                <ejs-datepicker id="occupatodal" format="dd/MM/yyyy" ejs-for="@Model.curriculum.OccupatoDal" />
+
+                                            </div>
+                                        </div>
+                                        <div id="occupatodalError">
+                                            <span asp-validation-for="@Model.curriculum.OccupatoDal" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Mansioni Svolte</label>
+                                                <ejs-textbox id="mansioni" multiline="true" ejs-for="@Model.curriculum.MansioniSvolte" />
+                                            </div>
+                                        </div>
+                                        <div id="mansioniError">
+                                            <span asp-validation-for="@Model.curriculum.MansioniSvolte" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Tipo di Assunzione</label>
+                                                <ejs-dropdownlist id="assunzione" dataSource="@Enum.GetNames(typeof(Assunzione))" ejs-for="@Model.curriculum.TipoAssunzione" popupWidth="180px"></ejs-dropdownlist>
+                                            </div>
+                                        </div>
+                                        <div id="assunzioneError">
+                                            <span asp-validation-for="@Model.curriculum.TipoAssunzione" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+                                                <label class="control-label">Eventuale Scadenza</label>
+                                                <ejs-datepicker id="scadenza" format="dd/MM/yyyy" ejs-for="@Model.curriculum.Scadenza" />
+
+                                            </div>
+                                        </div>
+                                        <div id="scadenzaError">
+                                            <span asp-validation-for="@Model.curriculum.Scadenza" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Livello di Inquadramento</label>
+                                                <ejs-textbox id="inquadramento" ejs-for="@Model.curriculum.LivelloInquadramento" />
+                                            </div>
+                                        </div>
+                                        <div id="inquadramentoError">
+                                            <span asp-validation-for="@Model.curriculum.LivelloInquadramento" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Contratto</label>
+                                                <ejs-textbox id="contratto" ejs-for="@Model.curriculum.Contratto" />
+                                            </div>
+                                        </div>
+                                        <div id="contrattoError">
+                                            <span asp-validation-for="@Model.curriculum.Contratto" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">RAL Annua</label>
+                                                <ejs-textbox id="ral" ejs-for="@Model.curriculum.RAL" />
+                                            </div>
+                                        </div>
+                                        <div id="ralError">
+                                            <span asp-validation-for="@Model.curriculum.RAL" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+                                                <label class="e-label-bottom">Esperienze Professionali</label><br />
+                                                <ejs-radiobutton id="esperienzeSi" value="Si" label="Si" name="esperienze" ejs-for="@Model.curriculum.Esperienze"></ejs-radiobutton>
+                                                <ejs-radiobutton id="esperienzeNo" value="No" label="No" name="esperienze" ejs-for="@Model.curriculum.Esperienze"></ejs-radiobutton>
+
+                                            </div>
+
+                                        </div>
+                                        <div id="esperienzeError">
+                                            <span asp-validation-for="@Model.curriculum.Esperienze" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <!-- #endregion -->
+                            <!-- #region Lingue-->
+                            <div class="tab-pane fade" id="lingue" role="tabpanel" aria-labelledby="lingue-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <div class="form-group required">
+                                                    <label class="control-label">Madrelingua</label>
+                                                    <ejs-dropdownlist id="madrelingua" dataSource="@Enum.GetNames(typeof(Lingue))" ejs-for="@Model.curriculum.Madrelingua" popupWidth="180px"></ejs-dropdownlist>
+                                                </div>
+                                                <div id="madrelinguaError">
+                                                    <span asp-validation-for="@Model.curriculum.Madrelingua" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                        </div>
+                                </div>
+                                <!-- #region 1a sezione-->
+                                <div class="card">
+                                    <div class="coard-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Lingua Conosciuta (1)</label>
+                                                        <ejs-dropdownlist id="linguaconosciutauno" dataSource="@Enum.GetNames(typeof(Lingue))" ejs-for="@Model.curriculum.LinguaConosciutaUno" popupWidth="180px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div id="linguaconosciutaunoError">
+                                                    <span asp-validation-for="@Model.curriculum.LinguaConosciutaUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Ascolto)</label>
+                                                        <ejs-dropdownlist id="comprensioneascoltouno" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneAscoltoUno" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div id="comprensioneascoltounoError">
+                                                    <span asp-validation-for="@Model.curriculum.ComprensioneAscoltoUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Lettura)</label>
+                                                        <ejs-dropdownlist id="comprensioneletturauno" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneLetturaUno" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div id="comprensioneletturaunoError">
+                                                    <span asp-validation-for="@Model.curriculum.ComprensioneLetturaUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Interazione)</label>
+                                                        <ejs-dropdownlist id="parlatointerazioneuno" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoInterazioneUno" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div id="parlatointerazioneunoError">
+                                                    <span asp-validation-for="@Model.curriculum.ParlatoInterazioneUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Produzione Orale)</label>
+                                                        <ejs-dropdownlist id="parlatooraleuno" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoOraleUno" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div id="parlatooraleunoError">
+                                                    <span asp-validation-for="@Model.curriculum.ParlatoOraleUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Scritto</label>
+                                                        <ejs-dropdownlist id="scrittouno" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ScrittoUno" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+                                                <div id="scrittounoError">
+                                                    <span asp-validation-for="@Model.curriculum.ScrittoUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- #endregion-->
+                                <!-- #region 2a sezione-->
+                                <div class="card">
+                                    <div class="coard-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Lingua Conosciuta (2)</label>
+                                                        <ejs-dropdownlist id="linguaconosciutadue" dataSource="@Enum.GetNames(typeof(Lingue))" ejs-for="@Model.curriculum.LinguaConosciutaDue" popupWidth="180px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Ascolto)</label>
+                                                        <ejs-dropdownlist id="comprensioneascoltodue" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneAscoltoDue" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Lettura)</label>
+                                                        <ejs-dropdownlist id="comprensioneletturadue" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneLetturaDue" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Interazione)</label>
+                                                        <ejs-dropdownlist id="parlatointerazionedue" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoInterazioneDue" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Produzione Orale)</label>
+                                                        <ejs-dropdownlist id="parlatooraledue" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoOraleDue" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Scritto</label>
+                                                        <ejs-dropdownlist id="scrittodue" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ScrittoDue" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- #endregion-->
+                                <!-- #region 3a sezione-->
+                                <div class="card">
+                                    <div class="coard-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Lingua Conosciuta (3)</label>
+                                                        <ejs-dropdownlist id="linguaconosciutatre" dataSource="@Enum.GetNames(typeof(Lingue))" ejs-for="@Model.curriculum.LinguaConosciutaTre" popupWidth="180px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Ascolto)</label>
+                                                        <ejs-dropdownlist id="comprensioneascoltotre" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneAscoltoTre" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Lettura)</label>
+                                                        <ejs-dropdownlist id="comprensioneletturatre" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneLetturaTre" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Interazione)</label>
+                                                        <ejs-dropdownlist id="parlatointerazionetre" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoInterazioneTre" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Produzione Orale)</label>
+                                                        <ejs-dropdownlist id="parlatooraletre" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoOraleTre" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Scritto</label>
+                                                        <ejs-dropdownlist id="scrittotre" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ScrittoTre" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- #endregion-->
+                                <!-- #region 4a sezione-->
+                                <div class="card">
+                                    <div class="coard-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Lingua Conosciuta (4)</label>
+                                                        <ejs-dropdownlist id="linguaconosciutaquattro" dataSource="@Enum.GetNames(typeof(Lingue))" ejs-for="@Model.curriculum.LinguaConosciutaQuattro" popupWidth="180px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Ascolto)</label>
+                                                        <ejs-dropdownlist id="comprensioneascoltoquettro" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneAscoltoQuattro" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Lettura)</label>
+                                                        <ejs-dropdownlist id="comprensioneletturaquattro" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneLetturaQuattro" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Interazione)</label>
+                                                        <ejs-dropdownlist id="parlatointerazionequattro" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoInterazioneQuattro" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Produzione Orale)</label>
+                                                        <ejs-dropdownlist id="parlatooralequattro" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoOraleQuattro" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Scritto</label>
+                                                        <ejs-dropdownlist id="scrittoquattro" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ScrittoQuattro" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <!-- #endregion-->
+                                <!-- #region 5a sezione-->
+                                <div class="card">
+                                    <div class="coard-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Lingua Conosciuta (5)</label>
+                                                        <ejs-dropdownlist id="linguaconosciutacinque" dataSource="@Enum.GetNames(typeof(Lingue))" ejs-for="@Model.curriculum.LinguaConosciutaCinque" popupWidth="180px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Ascolto)</label>
+                                                        <ejs-dropdownlist id="comprensioneascoltocinque" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneAscoltoCinque" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Comprensione (Lettura)</label>
+                                                        <ejs-dropdownlist id="comprensioneletturacinque" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ComprensioneLetturaCinque" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Interazione)</label>
+                                                        <ejs-dropdownlist id="parlatointerazionecinque" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoInterazioneCinque" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Parlato (Produzione Orale)</label>
+                                                        <ejs-dropdownlist id="parlatooralecinque" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ParlatoOraleCinque" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Scritto</label>
+                                                        <ejs-dropdownlist id="scrittocinque" dataSource="@Enum.GetNames(typeof(LingueLivello))" ejs-for="@Model.curriculum.ScrittoCinque" popupWidth="100px"></ejs-dropdownlist>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- #endregion-->
+                            </div>
+                            <!-- #endregion -->
+                            <!-- #region ConoscenzeInformatiche -->
+                            <div class="tab-pane fade" id="conoscenzeinformatiche" role="tabpanel" aria-labelledby="conoscenzeinformatiche-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+
+                                                    <label class="control-label">Excel</label>
+                                                    <ejs-dropdownlist id="excellivello" dataSource="@Enum.GetNames(typeof(LivelloApprendimento))" ejs-for="@Model.curriculum.LivelloExcel" popupWidth="180px"></ejs-dropdownlist>
+
+                                                </div>
+                                            </div>
+                                            <div id="excellivelloError">
+                                                <span asp-validation-for="@Model.curriculum.LivelloExcel" class="e-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+
+                                                    <label class="control-label">Patente del Computer</label>
+                                                    <ejs-dropdownlist id="patentepc" dataSource="@Enum.GetNames(typeof(PatenteComputer))" ejs-for="@Model.curriculum.PatenteComputer" popupWidth="180px"></ejs-dropdownlist>
+                                                </div>
+
+                                            </div>
+                                            <div id="patentepcError">
+                                                <span asp-validation-for="@Model.curriculum.PatenteComputer" class="e-error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Software Gestionale</label>
+                                                    <ejs-textbox id="softwaregestionale" ejs-for="@Model.curriculum.Gestionale" />
+                                                </div>
+                                            </div>
+                                            <div id="softwaregestionaleError">
+                                                <span asp-validation-for="@Model.curriculum.Gestionale" class="e-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Livello</label>
+                                                    <ejs-dropdownlist id="livellogestionale" dataSource="@Enum.GetNames(typeof(LivelloApprendimento))" ejs-for="@Model.curriculum.LivelloGestionale" popupWidth="130px"></ejs-dropdownlist>
+                                                </div>
+                                            </div>
+                                            <div id="scrittounoError">
+                                                <span asp-validation-for="@Model.curriculum.Gestionale" class="e-error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Altro</label>
+                                                    <ejs-textbox id="altro" ejs-for="@Model.curriculum.Altro" />
+                                                </div>
+                                            </div>
+                                            <div id="altroError">
+                                                <span asp-validation-for="@Model.curriculum.Altro" class="e-error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-card">
+                                                <div class="control_wrapper accordion-control-section">
+                                                    <label class="e-label-bottom">Livello</label>
+                                                    <ejs-dropdownlist id="livelloaltro" dataSource="@Enum.GetNames(typeof(LivelloApprendimento))" ejs-for="@Model.curriculum.LivelloAltro" popupWidth="130px"></ejs-dropdownlist>
+                                                </div>
+                                            </div>
+                                            <div id="slivelloaltroError">
+                                                <span asp-validation-for="@Model.curriculum.LivelloAltro" class="e-error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                        </div>
+
+
+                                </div>
+                            </div>
+                            <!-- #endregion -->
+                            <!-- #region EsperienzeEstere -->
+                            <div class="tab-pane fade" id="esperienze" role="tabpanel" aria-labelledby="esperienze-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Descrizione (1)</label>
+                                                        <ejs-textbox id="esterodescrizioneuno" ejs-for="@Model.curriculum.EsteroDescrizioneUno" />
+                                                    </div>
+                                                </div>
+                                                <div id="esterodescrizioneError">
+                                                    <span asp-validation-for="@Model.curriculum.EsteroDescrizioneUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Anno</label>
+                                                        <ejs-textbox id="esteroannouno" ejs-for="@Model.curriculum.EsteroAnnoUno" />
+                                                    </div>
+                                                </div>
+                                                <div id="esteroannounoError">
+                                                    <span asp-validation-for="@Model.curriculum.EsteroAnnoUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Durata</label>
+                                                        <ejs-textbox id="esteroduratauno" ejs-for="@Model.curriculum.EsteroDurataUno" />
+                                                    </div>
+                                                </div>
+                                                <div id="esterodurataunoError">
+                                                    <span asp-validation-for="@Model.curriculum.EsteroDurataUno" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Descrizione (2)</label>
+                                                        <ejs-textbox id="esterodescrizionedue" ejs-for="@Model.curriculum.EsteroDescrizioneDue" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Anno</label>
+                                                        <ejs-textbox id="esteroannodue" ejs-for="@Model.curriculum.EsteroAnnoDue" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Durata</label>
+                                                        <ejs-textbox id="esteroduratadue" ejs-for="@Model.curriculum.EsteroDurataDue" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Descrizione (3)</label>
+                                                        <ejs-textbox id="esterodescrizionetre" ejs-for="@Model.curriculum.EsteroDescrizioneTre" />
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Anno</label>
+                                                        <ejs-textbox id="esteroannotre" ejs-for="@Model.curriculum.EsteroAnnoTre" />
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-card">
+                                                    <div class="control_wrapper accordion-control-section">
+                                                        <label class="e-label-bottom">Durata</label>
+                                                        <ejs-textbox id="esteroduratatre" ejs-for="@Model.curriculum.EsteroDurataTre" />
+                                                    </div>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- #endregion -->
+                            <!-- #region AltreInfo-->
+                            <div class="tab-pane fade" id="altreinfo" role="tabpanel" aria-labelledby="altreinfo-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <div class="form-group required">
+                                                    <label class="control-label">Qual'è l'area aziendale di suo interesse? (PRIORITARIA)</label>
+                                                    <ejs-dropdownlist id="areauno" dataSource="@Enum.GetNames(typeof(Settore))" ejs-for="@Model.curriculum.AreaAziendalePrioritaria" popupWidth="160px"></ejs-dropdownlist>
+                                                </div>
+                                                <div id="areaunoError">
+                                                    <span asp-validation-for="@Model.curriculum.AreaAziendalePrioritaria" class="e-error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+                                                <label class="control-label">Qual'è l'area aziendale di suo interesse? (SECONDARIA)</label>
+                                                <ejs-dropdownlist id="areadue" dataSource="@Enum.GetNames(typeof(Settore))" ejs-for="@Model.curriculum.AreaAziendaleSecondaria" popupWidth="160px"></ejs-dropdownlist>
+                                            </div>
+
+                                        </div>
+                                        <div id="areadueError">
+                                            <span asp-validation-for="@Model.curriculum.AreaAziendaleSecondaria" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+
+                                                <label class="e-label-bottom">Disponibilità</label><br />
+                                                <ejs-checkbox id="dispuno" label="Trasferimenti" name="disp" ejs-for="@Model.curriculum.DispTrasferimenti" cssClass="e-custom"></ejs-checkbox>
+                                                <ejs-checkbox id="dispdue" label="Trasferte all'estero" name="disp" ejs-for="@Model.curriculum.DispEstero" cssClass="e-custom"></ejs-checkbox>
+                                                <ejs-checkbox id="disptre" label="Trasferte in Italia" name="disp" ejs-for="@Model.curriculum.DispItalia" cssClass="e-custom"></ejs-checkbox>
+                                                <ejs-checkbox id="dispquattro" label="Turni (anche notturni)" name="disp" ejs-for="@Model.curriculum.DispTurni" cssClass="e-custom"></ejs-checkbox>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-card">
+                                            <div class="control_wrapper accordion-control-section">
+                                                <label class="e-label-bottom">Altre Informazioni</label>
+                                                <ejs-textbox id="altreinformazioni" multiline="true" ejs-for="@Model.curriculum.AltreInfo" />
+                                            </div>
+                                        </div>
+                                        <div id="altreinfoError">
+                                            <span asp-validation-for="@Model.curriculum.AltreInfo" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                        </div>
+</div>
+                            </div>
+                            <!-- #endregion -->
+                            <!-- #region Inviodati-->
+                            <div class="tab-pane fade" id="inviodati" role="tabpanel" aria-labelledby="inviodati-tab">
+                                <div class="card">
+                                    <div class="card-body">
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <div class="form-card">
+
+                                            <div class="form-group required">
+                                                <label style="font-weight:bold">Carica Curriculum</label><br />
+                                                <input id="uploadfile" asp-for="@Model.curriculum.UploadedFile" />
+                                            </div>
+                                            <div id="uploadError">
+                                                <span asp-validation-for="@Model.curriculum.UploadedFile" class="e-error"></span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="termini" style="font-weight:bold">Informativa ai sensi e per gli effetti di cui all'articolo 13, D.Lgs. 30 giugno 2003 n.196 'Codice in materia di protezione dei dati personali'</label>
+                                        <div class="col-sm-10">
+
+                                            <textarea style="border:1px solid black" class="form-control-plaintext" readonly id="termini" rows="3">@terms</textarea>
+                                        </div>
+                                        <ejs-checkbox id="termchck" label="Accetto" name="accetto" ejs-for="@Model.curriculum.TerminiRisposta" cssClass="e-customsize"></ejs-checkbox>
+                                        <div id="termError">
+                                            <span asp-validation-for="@Model.curriculum.TerminiRisposta" class="e-error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row g3">
+                                    <div class="col-md-12">
+
+                                    </div>
+                                </div>
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <div class="form-card">
+                                            <div class="submitBtn">
+                                                <input id="submit-btn" class="submit-btn e-btn" type="Submit" value="Salva" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                                    </div>
+                            </div>
+                            <!-- #endregion -->
+
+                        </div>
+
+            </form>
+
+            <!-- Syncfusion Essential JS 2 ScriptManager -->
+            <ejs-scripts>
+
+            </ejs-scripts>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
+
+

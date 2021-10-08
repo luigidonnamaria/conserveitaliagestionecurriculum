@@ -1,0 +1,88 @@
+﻿@page
+
+@model conserveitaliagestionecurriculum.Pages.SuccessModel
+@{
+    Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Success</title>
+</head>
+<body>
+   
+    <h3>Operazione eseguita con successo</h3>
+    <h3>Dati Sottomessi:</h3>
+    <table>
+        <tr><td>Nome</td><td>@Model.cur.Nome</td></tr>
+        <tr><td>Cognome</td><td>@Model.cur.Cognome</td></tr>
+        <tr><td>Indirizzo</td><td>@Model.cur.Indirizzo</td></tr>
+        <tr><td>Telefono Abitazione</td><td>@Model.cur.TelefonoAbitazione</td></tr>
+        <tr><td>Telefono Cellulare</td><td>@Model.cur.TelefonoCellulare</td></tr>
+        <tr><td>Numero Ufficio</td><td>@Model.cur.NumeroUfficio</td></tr>
+        <tr><td>Data Nascita</td><td>@Model.cur.DataNascita</td></tr>
+        <tr><td>Citta Nascita</td><td>@Model.cur.CittaNascita</td></tr>
+        <tr><td>CAP</td><td>@Model.cur.Cap</td></tr>
+        <tr><td>Citta</td><td>@Model.cur.Citta</td></tr>
+        <tr><td>Email</td><td>@Model.cur.Email</td></tr>
+        <tr><td>Provincia</td><td>@Model.cur.CurriculumProvincia</td></tr>
+        <tr><td>Sesso</td><td>@Model.cur.Sesso</td></tr>
+        <tr><td>Stato</td><td>@Model.cur.CurriculumStato</td></tr>
+        <tr><td>Stato Civile</td><td>@Model.cur.CurriculumStatoCivile</td></tr>
+        <tr><td>Patente</td><td>@Model.cur.CurriculumPatente</td></tr>
+        <tr><td>Nazionalita</td><td>@Model.cur.Nazionalita</td></tr>
+        <tr><td>Codice Fiscale</td><td>@Model.cur.CodiceFiscale</td></tr>
+        <tr><td>Titolo Studio</td><td>@Model.cur.TitoloStudioUno</td></tr>
+        <tr><td>Sede</td><td>@Model.cur.SedeUno</td></tr>
+        <tr><td>Anno</td><td>@Model.cur.AnnoUno</td></tr>
+        <tr><td>Tipologia</td><td>@Model.cur.TipologiaUno</td></tr>
+        <tr><td>Voto</td><td>@Model.cur.VotoUno</td></tr>
+        <tr><td>Su</td><td>@Model.cur.RangeVotoUno</td></tr>
+        <tr><td>Lode</td><td>@Model.cur.LodeUno</td></tr>
+        <tr><td>Corso</td><td>@Model.cur.CorsoUno</td></tr>
+        <tr><td>Anno</td><td>@Model.cur.AnnoCorsoUno</td></tr>
+        <tr><td>Istituto</td><td>@Model.cur.IstitutoUno</td></tr>
+        <tr><td>Durata</td><td>@Model.cur.DurataUno</td></tr>
+        <tr><td>Occupato</td><td>@Model.cur.Occupato</td></tr>
+        <tr><td>Settore</td><td>@Model.cur.Settore</td></tr>
+        <tr><td>Durata</td><td>@Model.cur.DurataUno</td></tr>
+        <tr><td>Datore</td><td>@Model.cur.DatoreLavoro</td></tr>
+        <tr><td>OccupatoDal</td><td>@Model.cur.OccupatoDal</td></tr>
+        <tr><td>Mansioni</td><td>@Model.cur.MansioniSvolte</td></tr>
+        <tr><td>TipoAssunzione</td><td>@Model.cur.TipoAssunzione</td></tr>
+        <tr><td>Scadenza</td><td>@Model.cur.Scadenza</td></tr>
+        <tr><td>Esperienze</td><td>@Model.cur.Esperienze</td></tr>
+        <tr><td>Livello Inquadramento</td><td>@Model.cur.LivelloInquadramento</td></tr>
+        <tr><td>RAL</td><td>@Model.cur.RAL</td></tr>
+        <tr><td>Madrelingua</td><td>@Model.cur.Madrelingua</td></tr>
+        <tr><td>Lingua Cosnosciuta</td><td>@Model.cur.LinguaConosciutaUno</td></tr>
+        <tr><td>Comprensione Ascolto</td><td>@Model.cur.ComprensioneAscoltoUno</td></tr>
+        <tr><td>Comprensione Lettura</td><td>@Model.cur.ComprensioneLetturaUno</td></tr>
+        <tr><td>Parlato Interazione</td><td>@Model.cur.ParlatoInterazioneUno</td></tr>
+        <tr><td>Parlato orale</td><td>@Model.cur.ParlatoOraleUno</td></tr>
+        <tr><td>Scritto</td><td>@Model.cur.ScrittoUno</td></tr>
+        <tr><td>Excel</td><td>@Model.cur.LivelloExcel</td></tr>
+        <tr><td>Gestionale</td><td>@Model.cur.Gestionale</td></tr>
+        <tr><td>Livello Gestionale</td><td>@Model.cur.LivelloGestionale </td></tr>
+        <tr><td>Altro</td><td>@Model.cur.Altro</td></tr>
+        <tr><td>Livello ALtro</td><td>@Model.cur.LivelloAltro</td></tr>
+        <tr><td>Patente Computer</td><td>@Model.cur.PatenteComputer</td></tr>
+        <tr><td>Estero Descrizione</td><td>@Model.cur.EsteroDescrizioneUno</td></tr>
+        <tr><td>Estero Durata</td><td>@Model.cur.EsteroDurataUno</td></tr>
+        <tr><td>Estero ANno</td><td>@Model.cur.EsteroAnnoUno</td></tr>
+        <tr><td>Area Prioritaria</td><td>@Model.cur.AreaAziendalePrioritaria</td></tr>
+        <tr><td>Area Secondaria</td><td>@Model.cur.AreaAziendaleSecondaria</td></tr>
+        <tr><td>Disponibilita</td><td>@Model.valDisp</td></tr>
+        <tr><td>Altre info</td><td>@Model.cur.AltreInfo</td></tr>
+
+
+    </table>
+
+</body>
+</html>
