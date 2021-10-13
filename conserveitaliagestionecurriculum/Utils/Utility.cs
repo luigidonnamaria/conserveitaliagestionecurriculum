@@ -2,6 +2,7 @@
 using Microsoft.SharePoint.Client;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,14 +12,17 @@ namespace conserveitaliagestionecurriculum.Utils
     {
         private ClientContext ctx;
         private List<Elements> it = new List<Elements>();
+        private ClientResult<long> bytesUploaded;
+        private long fileoffset;
 
-        public Utility()
-        {
-            
-        }
-        public async Task setInstances(ClientContext ct,List<string> listsname)
+        public Utility(ClientContext ct)
         {
             ctx = ct;
+            
+        }
+        public async Task setElements(List<string> listsname)
+        {
+            
             foreach(string item in listsname)
             {
                 Elements el = new Elements();
@@ -60,9 +64,9 @@ namespace conserveitaliagestionecurriculum.Utils
             return toRet;
         }
 
-        public void saveData(ClientContext context, string listname,Curriculum curriculum)
+        public int saveData(string listname,Curriculum curriculum)
         {
-            List curriculumlist = context.Web.Lists.GetByTitle(listname);
+            List curriculumlist = ctx.Web.Lists.GetByTitle(listname);
             ListItemCreationInformation itemCreateInfo = new ListItemCreationInformation();
             ListItem newItem = curriculumlist.AddItem(itemCreateInfo);
             newItem["Nome"] = curriculum.Nome;
@@ -73,9 +77,49 @@ namespace conserveitaliagestionecurriculum.Utils
             newItem["Citta"] = curriculum.Citta;
             newItem["Mansioni"] = curriculum.MansioniSvolte;
             newItem.Update();
-
-            context.ExecuteQuery();
+            ctx.Load(newItem);//Load the new item
+            
+            ctx.ExecuteQuery();
+            return newItem.Id;
         }
+
+         public  ListItem UploadFile(string uploadFolderUrl, Stream fileContent,string filename)
+ {
+             FileCreationInformation newfile = new FileCreationInformation();
+             newfile.Url = filename;
+            fileContent.Seek(0, SeekOrigin.Begin);
+            newfile.ContentStream = fileContent;
+             var targetFolder = ctx.Web.GetFolderByServerRelativeUrl(uploadFolderUrl);
+             Microsoft.SharePoint.Client.File uploadFile = targetFolder.Files.Add(newfile);
+            ctx.Load(uploadFile.ListItemAllFields);
+             ctx.ExecuteQuery();
+             return uploadFile.ListItemAllFields;
+        
+        }
+
+        public void setLookupField(ListItem listItem, int lookupID,string fieldName)
+        {
+            listItem[fieldName] = lookupID;
+            listItem.Update();
+            ctx.ExecuteQuery();
+        }
+
+        public void createFolder(string listName, string folderName)
+        {
+            List list = ctx.Web.Lists.GetByTitle(listName);
+            ListItemCreationInformation info = new ListItemCreationInformation();
+            info.UnderlyingObjectType = FileSystemObjectType.Folder;
+            info.LeafName = folderName.Trim();//Trim for spaces.Just extra check
+            ListItem newItem = list.AddItem(info);
+            newItem["Title"] = folderName;
+            newItem.Update();
+           
+            ctx.ExecuteQuery();
+            
+            
+        }
+    
+ 
     }
 
     public class Elements

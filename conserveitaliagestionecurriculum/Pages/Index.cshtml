@@ -214,7 +214,7 @@
                                     <div class="control_wrapper accordion-control-section">
                                         <div class="form-group required">
                                             <label class="control-label">Stato</label>
-                                            <ejs-dropdownlist id="stato" dataSource="@Enum.GetNames(typeof(Stato))" ejs-for="@Model.curriculum.CurriculumStato" popupWidth="150px"></ejs-dropdownlist>
+                                            <ejs-dropdownlist id="stato" dataSource="@Model.getControl("Stato")" ejs-for="@Model.curriculum.CurriculumStato" popupWidth="150px"></ejs-dropdownlist>
                                         </div>
                                         <div id="statoError">
                                             <span asp-validation-for="@Model.curriculum.CurriculumStato" class="e-error"></span>
@@ -378,7 +378,7 @@
                                     <div class="control_wrapper accordion-control-section">
                                         <div class="form-group required">
                                             <label class="control-label">Nazionalità</label>
-                                            <ejs-dropdownlist id="nazionalita" dataSource="@Enum.GetNames(typeof(Stato))" ejs-for="@Model.curriculum.Nazionalita" popupWidth="150px"></ejs-dropdownlist>
+                                            <ejs-dropdownlist id="nazionalita" dataSource="@Model.getControl("Stato")" ejs-for="@Model.curriculum.Nazionalita" popupWidth="150px"></ejs-dropdownlist>
                                         </div>
                                         <div id="nazionalitaError">
                                             <span asp-validation-for="@Model.curriculum.Nazionalita" class="e-error"></span>
@@ -419,7 +419,7 @@
                                             <div class="control_wrapper accordion-control-section">
                                                 <div class="form-group required">
                                                     <label class="control-label">Titolo Studio</label>
-                                                    <ejs-dropdownlist id="titolostudiouno" dataSource="@Enum.GetNames(typeof(TitoloStudio))" ejs-for="@Model.curriculum.TitoloStudioUno" popupWidth="150px"></ejs-dropdownlist>
+                                                    <ejs-dropdownlist id="titolostudiouno" dataSource="@Model.getControl("TitoloStudio")" ejs-for="@Model.curriculum.TitoloStudioUno" popupWidth="150px"></ejs-dropdownlist>
                                                 </div>
                                                 <div id="titolostudiounoError">
                                                     <span asp-validation-for="@Model.curriculum.TitoloStudioUno" class="e-error"></span>
@@ -526,7 +526,7 @@
                                             <div class="control_wrapper accordion-control-section">
 
                                                 <label class="control-label">Titolo Studio (2)</label>
-                                                <ejs-dropdownlist id="titolostudiodue" dataSource="@Enum.GetNames(typeof(TitoloStudio))" ejs-for="@Model.curriculum.TitoloStudioDue" popupWidth="150px"></ejs-dropdownlist>
+                                                <ejs-dropdownlist id="titolostudiodue" dataSource="@Model.getControl("TitoloStudio")" ejs-for="@Model.curriculum.TitoloStudioDue" popupWidth="150px"></ejs-dropdownlist>
 
                                             </div>
                                         </div>
@@ -614,7 +614,7 @@
                                     <div class="control_wrapper accordion-control-section">
 
                                         <label class="control-label">Titolo Studio (3)</label>
-                                        <ejs-dropdownlist id="titolostudiotre" dataSource="@Enum.GetNames(typeof(TitoloStudio))" ejs-for="@Model.curriculum.TitoloStudioTre" popupWidth="150px"></ejs-dropdownlist>
+                                        <ejs-dropdownlist id="titolostudiotre" dataSource="@Model.getControl("TitoloStudio")" ejs-for="@Model.curriculum.TitoloStudioTre" popupWidth="150px"></ejs-dropdownlist>
 
                                     </div>
                                 </div>

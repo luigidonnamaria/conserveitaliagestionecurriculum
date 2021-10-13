@@ -78,7 +78,8 @@ namespace conserveitaliagestionecurriculum.Service
 
 
             AuthenticationManager auth = new AuthenticationManager();
-            return auth.GetContext(new Uri(siteUrl), user, secpassword, clientAppId);
+              return auth.GetContext(new Uri(siteUrl), user, secpassword, clientAppId);
+          
         }
     }
 }

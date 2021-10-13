@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using conserveitaliagestionecurriculum.Utils;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -290,11 +291,32 @@ namespace conserveitaliagestionecurriculum.Models
         public bool TerminiRisposta { get; set; }
 
         #endregion
-
+        
 
     }
    
 }
+/**public class FormControls
+{
+    public List<Elements> listControls;
+    public FormControls(){
+        listControls=new List<Elements>();
+        }
+
+    public List<string> get(string name)
+    {
+        List<string> val = new List<string>();
+        foreach (Elements e in listControls)
+        {
+            if (e.Name == name)
+                val = e.items;
+        }
+
+        return val;
+    }
+
+
+}**/
 
 
 public enum PatenteComputer
@@ -366,28 +388,8 @@ public enum RangeVoto
 
 }
 
-public enum TitoloStudio
-{
-    Nessuno,
-    LicenzaMedia,
-    LaureaPrimoLivello,
-    LicenzaSuperiore,
-    LaureaSecondoLivello
-
-}
 
 
-
-
-
-public enum Stato
-{
-    Italia,
-    Francia,
-    Spagna,
-    Germania,
-    StatiUniti
-}
 public enum Sessi
 {
     Uomo,

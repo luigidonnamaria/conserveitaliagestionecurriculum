@@ -28,59 +28,66 @@ namespace conserveitaliagestionecurriculum.Pages
         private readonly Utility utility;
         private List<string> shpListsName = new List<string>();
         private string targetList;
+        private string targetLibrary;
+        private string lookupFieldName;
 
         [BindProperty]
         public Curriculum curriculum { get; set; }
         [BindProperty]
         public List<Elements> formControls { get; set; } 
 
-        public IndexModel(IHostEnvironment environment, ClientContext clientContext,IConfiguration configuration)
+        public  IndexModel(IHostEnvironment environment,ClientContext clientContext,IConfiguration configuration)
         {
             
              ctx = clientContext;
             _environment = environment;
             _configuration = configuration;
-            utility = new Utility();
+            utility = new Utility(clientContext);
             string[] myLists = _configuration.GetSection("ControlsList").Get<string[]>();
-            shpListsName = myLists.ToList<string>();
+            shpListsName = myLists.ToList<string>();          
             targetList = _configuration.GetValue<string>("SharePoint:TargetList");
+            targetLibrary = _configuration.GetValue<string>("SharePoint:TargetLibrary");
+            lookupFieldName = _configuration.GetValue<string>("SharePoint:LibraryLookUpFieldName");
         }
 
         public  async Task OnGetAsync()
         {
-            
-            await utility.setInstances(ctx, shpListsName);
-            formControls = new List<Elements>();
-            foreach(string it in shpListsName)
-            {
-                Elements el = new Elements();
-                el.Name = it;
-                el.items = utility.getListValues(it);
-                formControls.Add(el);
-
-            }
-            
             curriculum = new Curriculum();
+            await utility.setElements(shpListsName);
+            setFormControls();
+ 
         }
        
-        public IActionResult OnPost(Curriculum curriculum)
+        public async Task<IActionResult> OnPostAsync(Curriculum curriculum)
         {
       
-            if (!ModelState.IsValid  || (curriculum.UploadedFile == null || curriculum.UploadedFile.Length == 0))
+            if (!ModelState.IsValid  )
             {
+            
                 return Page();
+                
             }
             else
             {
-                string targetFileName = $"{_environment.ContentRootPath}/wwwroot/uploads/{curriculum.UploadedFile.FileName}";
-
-                using (var stream = new FileStream(targetFileName, FileMode.Create))
-                {
-                    curriculum.UploadedFile.CopyToAsync(stream);
-                }
-
                 //Scrivo su sharepoint
-                utility.saveData(ctx,targetList,curriculum);
+                int id= utility.saveData(targetList, curriculum);
+                if (curriculum.UploadedFile != null && curriculum.UploadedFile.Length != 0)
+                {
+
+                    using (var ms = new MemoryStream())
+                    {
+                      await curriculum.UploadedFile.CopyToAsync(ms);
+                        string nameFolder = id + "_" + curriculum.Nome + curriculum.Cognome;
+                       // var fileBytes = ms.ToArray();
+                        utility.createFolder(targetLibrary, nameFolder);
+                        ListItem item = utility.UploadFile(targetLibrary+"/" + nameFolder, ms, curriculum.UploadedFile.FileName);
+                        utility.setLookupField(item, id, lookupFieldName);
+                    }
+
+                  
+                };
+                        
+                
                 return RedirectToPage("Success", "CurriculumData", curriculum);
 
             }
@@ -88,6 +95,7 @@ namespace conserveitaliagestionecurriculum.Pages
 
         public List<string> getControl(string name)
         {
+           
             List<string> val = new List<string>();
             foreach(Elements e in formControls)
             {
@@ -96,6 +104,21 @@ namespace conserveitaliagestionecurriculum.Pages
             }
 
             return val;
+        }
+
+        public void setFormControls()
+        {
+            formControls = new List<Elements>() ;
+            
+            foreach (string it in shpListsName)
+            {
+                Elements el = new Elements();
+                el.Name = it;
+                el.items = utility.getListValues(it);
+                
+                formControls.Add(el);
+
+            };
         }
 
         public void Save(IList<IFormFile> UploadFiles)
