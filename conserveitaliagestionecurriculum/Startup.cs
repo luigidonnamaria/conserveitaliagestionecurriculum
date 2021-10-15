@@ -11,6 +11,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using conserveitaliagestionecurriculum.Service;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace conserveitaliagestionecurriculum
 {
@@ -39,6 +41,7 @@ namespace conserveitaliagestionecurriculum
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
+           
             app.UseMvc();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(_configuration.GetValue<string>("SyncFusion:LicenseKey"));
             

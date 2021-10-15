@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.SharePoint.Client;
-using Syncfusion.EJ2.Navigations;
 
 
 namespace conserveitaliagestionecurriculum.Pages
@@ -43,6 +42,7 @@ namespace conserveitaliagestionecurriculum.Pages
             _environment = environment;
             _configuration = configuration;
             utility = new Utility(clientContext);
+            //recupero valori da appsettings
             string[] myLists = _configuration.GetSection("ControlsList").Get<string[]>();
             shpListsName = myLists.ToList<string>();          
             targetList = _configuration.GetValue<string>("SharePoint:TargetList");
@@ -70,24 +70,22 @@ namespace conserveitaliagestionecurriculum.Pages
             else
             {
                 //Scrivo su sharepoint
-                int id= utility.saveData(targetList, curriculum);
+                ListItem curItem= utility.saveData(targetList, curriculum);
+                //carico il file se è stato caricato
                 if (curriculum.UploadedFile != null && curriculum.UploadedFile.Length != 0)
                 {
 
                     using (var ms = new MemoryStream())
                     {
                       await curriculum.UploadedFile.CopyToAsync(ms);
-                        string nameFolder = id + "_" + curriculum.Nome + curriculum.Cognome;
-                       // var fileBytes = ms.ToArray();
+                        string nameFolder = curItem.Id + "_" + curriculum.Nome + curriculum.Cognome;                      
                         utility.createFolder(targetLibrary, nameFolder);
                         ListItem item = utility.UploadFile(targetLibrary+"/" + nameFolder, ms, curriculum.UploadedFile.FileName);
-                        utility.setLookupField(item, id, lookupFieldName);
-                    }
-
-                  
+                        utility.setLookupField(item, curItem.Id, lookupFieldName);
+                        utility.setHyperlinkField(curItem, targetLibrary + "/" + nameFolder);
+                    }                  
                 };
-                        
-                
+                                        
                 return RedirectToPage("Success", "CurriculumData", curriculum);
 
             }
@@ -153,5 +151,7 @@ namespace conserveitaliagestionecurriculum.Pages
                 Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = e.Message;
             }
         }
+
+       
     }
 }

@@ -11,59 +11,50 @@ namespace conserveitaliagestionecurriculum.Models
     public class Curriculum
     {
         #region InfoTab
-        [Required(ErrorMessage ="Il campo Nome è obbligatorio")]
+       
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "Il campo Cognome è obbligatorio")]
         public string Cognome { get; set; }
 
-        [Required(ErrorMessage = "Il campo Indirizzo è obbligatorio")]
         public string Indirizzo { get; set; }
-        [Required(ErrorMessage = "Il campo Telefono Abitazione è obbligatorio")]
+       
         public string TelefonoAbitazione { get; set; }
 
         public string TelefonoCellulare { get; set; }
 
         public string NumeroUfficio { get; set; }
-        [Required(ErrorMessage = "Il campo Data di Nascita è obbligatorio")]
+        
         public string DataNascita { get; set; }
 
-        [Required(ErrorMessage = "Il campo Cap è obbligatorio")]
-        [MaxLength(5)]
-        [MinLength(5)]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Inserire un cap valido")]
         public string Cap { get; set; }
 
-        [Required(ErrorMessage = "Il campo Citta è obbligatorio")]
+      
         public string Citta { get; set; }
-        [Required(ErrorMessage = "Il campo Citta di Nascita è obbligatorio")]
+       
         public string CittaNascita { get; set; }
 
-        [Required(ErrorMessage = "Il campo Nazionalità è obbligatorio")]
+       
         public string Nazionalita { get; set; }
 
        
         public string CodiceFiscale { get; set; }
 
-        [Required(ErrorMessage = "Il campo Email è obbligatorio")]
-        [EmailAddress(ErrorMessage = "Inserire formato valido")]
         public string Email { get; set; }
 
-      [Required(ErrorMessage = "Bisogna caricare un curriculum")]
+     
       public IFormFile UploadedFile { get; set; }
 
-        [Required(ErrorMessage = "Il campo Provincia è obbligatorio")]
         public string CurriculumProvincia { get; set; }
 
-        [Required(ErrorMessage = "Il campo Stato è obbligatorio")]
+     
         public string CurriculumStato { get; set; }
 
-        [Required(ErrorMessage = "Il campo Stato Civile è obbligatorio")]
+       
         public string CurriculumStatoCivile { get; set; }
 
         public string CurriculumPatente { get; set; }
 
-        [Required(ErrorMessage = "Il campo Sesso è obbligatorio")]
+       
         public string Sesso { get; set; }
 
         public string AltroRecapito { get; set; }
@@ -72,19 +63,19 @@ namespace conserveitaliagestionecurriculum.Models
         #endregion
         # region Titoli Studio
 
-        [Required(ErrorMessage = "Il campo Titolo di Studio è obbligatorio")]
+        
         public string TitoloStudioUno { get; set; }
 
-        [Required(ErrorMessage = "Il campo Sede è obbligatorio")]
+        
         public string SedeUno { get; set; }
 
-        [Required(ErrorMessage = "Il campo Anno è obbligatorio")]
+        
         public string AnnoUno { get; set; }
 
-        [Required(ErrorMessage = "Il campo Tipologia-Facolta è obbligatorio")]
+        
         public string TipologiaUno { get; set; }
 
-        [Required(ErrorMessage = "Il campo Voto è obbligatorio")]
+       
         public string VotoUno { get; set; }
 
         public string RangeVotoUno { get; set; }
@@ -170,7 +161,7 @@ namespace conserveitaliagestionecurriculum.Models
         public string RAL { get; set; }
         #endregion
         # region Lingue
-        [Required(ErrorMessage ="Il campo Madrelingua è obbligatorio")]
+        
         public string Madrelingua { get; set; }
 
         public string LinguaConosciutaUno { get; set; }
@@ -274,7 +265,7 @@ namespace conserveitaliagestionecurriculum.Models
         #region AltreInfo
 
         public string AltreInfo { get; set; }
-        [Required(ErrorMessage ="Il campo area aziendale è obbligatorio")]
+        
         public string AreaAziendalePrioritaria { get; set; }
 
         public string AreaAziendaleSecondaria { get; set; }
@@ -287,7 +278,7 @@ namespace conserveitaliagestionecurriculum.Models
 
         public bool DispTurni { get; set; }
 
-        [Range(typeof(bool), "true", "true", ErrorMessage = "L'informativa dei dati personali deve essere accettata.")]
+       
         public bool TerminiRisposta { get; set; }
 
         #endregion
@@ -296,119 +287,9 @@ namespace conserveitaliagestionecurriculum.Models
     }
    
 }
-/**public class FormControls
-{
-    public List<Elements> listControls;
-    public FormControls(){
-        listControls=new List<Elements>();
-        }
-
-    public List<string> get(string name)
-    {
-        List<string> val = new List<string>();
-        foreach (Elements e in listControls)
-        {
-            if (e.Name == name)
-                val = e.items;
-        }
-
-        return val;
-    }
-
-
-}**/
-
-
-public enum PatenteComputer
-{
-    ICDLEssentials,
-    ECDLBase,
-    ECDLStandard,
-    ECDLSpecialised,
-    ICDLFullStandard
-
-}
-
-public enum LivelloApprendimento
-{
-    Scolastico,
-    Discreto,
-    Buono,
-    Ottimo
-}
-
-public enum Lingue
-{
-    Italiano,
-        Francese,
-        Inglese,
-        Tedesco,
-        Spagnolo
-}
-
-public enum LingueLivello
-{
-    A1,
-    A2,
-    B1,
-    B2,
-    C1,
-    C2
-    
-}
 
 
 
-public enum Assunzione
-{
-    TempoIndeterminato,
-    TempoDeterminato,
-    Stage,
-    Tirocinante
 
-
-}
-
-public enum Settore
-{
-    Acquisti,
-    Marketing,
-    RisorseUmane,
-    Amministrazione,
-    Produzione,
-    SistemiInformativi
-
-}
-
-public enum RangeVoto
-{
-    Sessanta,
-    Cento,
-    Centodieci
-
-}
-
-
-
-public enum Sessi
-{
-    Uomo,
-    Donna
-    
-}
-
-public enum Lode
-{
-    Si,
-    No
-
-}
-
-public enum Patente
-{
-    A,
-    A1,
-    B
-}
 
 
